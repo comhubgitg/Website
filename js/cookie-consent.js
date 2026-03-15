@@ -4,12 +4,27 @@
   var CONSENT_KEY = 'graund_cookie_consent';
   var METRIKA_ID = 107083651;
 
+  function storageAvailable() {
+    try {
+      var test = '__storage_test__';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  var hasStorage = storageAvailable();
+
   function getConsent() {
-    return localStorage.getItem(CONSENT_KEY);
+    return hasStorage ? localStorage.getItem(CONSENT_KEY) : null;
   }
 
   function setConsent(value) {
-    localStorage.setItem(CONSENT_KEY, value);
+    if (hasStorage) {
+      localStorage.setItem(CONSENT_KEY, value);
+    }
   }
 
   function loadMetrika() {
@@ -27,11 +42,8 @@
     })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=" + METRIKA_ID, "ym");
 
     ym(METRIKA_ID, "init", {
-      ssr: true,
       webvisor: true,
       clickmap: true,
-      referrer: document.referrer,
-      url: location.href,
       accurateTrackBounce: true,
       trackLinks: true
     });

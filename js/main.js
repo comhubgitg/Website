@@ -54,9 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
      ----------------------------------------- */
   const header = document.querySelector('.header');
 
+  const hasHero = !!document.querySelector('.hero');
+
   function handleHeaderScroll() {
-    const scrollY = window.scrollY;
-    if (scrollY > 50) {
+    if (!hasHero) {
+      header.classList.add('scrolled');
+      return;
+    }
+    if (window.scrollY > 50) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
