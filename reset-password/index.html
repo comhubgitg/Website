@@ -239,7 +239,6 @@
     var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6cHl3Z3hqaGVvcXpkemdkcWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MDQyMzEsImV4cCI6MjA4ODA4MDIzMX0.NuLY38wUc5GecUHTbOPLIwWhuIChymtWQ-OZY8NQz1k';
 
     var sb;
-    var ready = false;
 
     function showView(id) {
       var views = ['view-loading', 'view-form', 'view-success', 'view-error'];
@@ -250,38 +249,35 @@
 
     function init() {
       try {
-        sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-          auth: { detectSessionInUrl: true, flowType: 'implicit' }
-        });
+        sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       } catch(e) {
         showView('view-error');
         return;
       }
 
-      // Listen for PASSWORD_RECOVERY event from hash tokens
-      sb.auth.onAuthStateChange(function(event, session) {
-        if (ready) return;
-        if (event === 'PASSWORD_RECOVERY') {
-          ready = true;
-          showView('view-form');
-        } else if (event === 'SIGNED_IN' && session) {
-          ready = true;
-          showView('view-form');
-        }
-      });
+      // Get token_hash and type from URL query params
+      var params = new URLSearchParams(window.location.search);
+      var tokenHash = params.get('token_hash');
+      var type = params.get('type');
 
-      // If no hash with tokens, show error after timeout
-      var hash = window.location.hash;
-      if (!hash || !hash.includes('access_token')) {
-        setTimeout(function() {
-          if (!ready) showView('view-error');
-        }, 1500);
-      } else {
-        // Hash has tokens, give supabase-js time to process
-        setTimeout(function() {
-          if (!ready) showView('view-error');
-        }, 5000);
+      if (!tokenHash || type !== 'recovery') {
+        showView('view-error');
+        return;
       }
+
+      // Verify the token_hash with Supabase to establish a session
+      sb.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' })
+        .then(function(res) {
+          if (res.error) {
+            console.error('verifyOtp error:', res.error.message);
+            showView('view-error');
+          } else {
+            showView('view-form');
+          }
+        })
+        .catch(function() {
+          showView('view-error');
+        });
     }
 
     // Password strength
@@ -345,7 +341,7 @@
         } else {
           showView('view-success');
         }
-      }).catch(function(e) {
+      }).catch(function() {
         err.textContent = 'Не удалось обновить пароль';
         err.style.display = 'block';
         btn.disabled = false;
