@@ -172,27 +172,27 @@
       <span class="digit digit--left">4</span>
       <div class="ghost-wrap">
         <!-- Ghost SVG — teal-themed, matches graund palette -->
-        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Body -->
-          <path d="M60 10C35 10 20 30 20 55v40c0 0 5-8 12-8s10 8 18 8 10-8 18-8 12 8 12 8V55c0-25-15-45-20-45z"
-                fill="#4A9EAF" opacity="0.9"/>
-          <!-- Lighter overlay -->
-          <path d="M60 10C35 10 20 30 20 55v40c0 0 5-8 12-8s10 8 18 8 10-8 18-8 12 8 12 8V55c0-25-15-45-20-45z"
-                fill="url(#ghostGrad)" opacity="0.4"/>
+        <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body + wavy tail -->
+          <path d="M50 5 C28 5, 12 24, 12 48 L12 100 C12 100, 18 90, 25 90 C32 90, 32 100, 38 100 C44 100, 44 90, 50 90 C56 90, 56 100, 62 100 C68 100, 68 90, 75 90 C82 90, 88 100, 88 100 L88 48 C88 24, 72 5, 50 5 Z"
+                fill="#4A9EAF"/>
+          <!-- Light highlight -->
+          <path d="M50 5 C28 5, 12 24, 12 48 L12 100 C12 100, 18 90, 25 90 C32 90, 32 100, 38 100 C44 100, 44 90, 50 90 C56 90, 56 100, 62 100 C68 100, 68 90, 75 90 C82 90, 88 100, 88 100 L88 48 C88 24, 72 5, 50 5 Z"
+                fill="url(#ghostGrad)" opacity="0.35"/>
           <!-- Eyes -->
-          <ellipse cx="45" cy="52" rx="7" ry="8" fill="#0E2A30"/>
-          <ellipse cx="72" cy="52" rx="7" ry="8" fill="#0E2A30"/>
-          <!-- Eye shine -->
-          <ellipse cx="43" cy="49" rx="2.5" ry="3" fill="#D8E8EB" opacity="0.7"/>
-          <ellipse cx="70" cy="49" rx="2.5" ry="3" fill="#D8E8EB" opacity="0.7"/>
+          <ellipse cx="38" cy="50" rx="7" ry="8.5" fill="#0E2A30"/>
+          <ellipse cx="62" cy="50" rx="7" ry="8.5" fill="#0E2A30"/>
+          <!-- Pupils -->
+          <ellipse cx="36" cy="47" rx="2.8" ry="3.2" fill="#D8E8EB" opacity="0.8"/>
+          <ellipse cx="60" cy="47" rx="2.8" ry="3.2" fill="#D8E8EB" opacity="0.8"/>
           <!-- Mouth -->
-          <ellipse cx="58" cy="68" rx="5" ry="4" fill="#0E2A30" opacity="0.6"/>
-          <!-- Blush -->
-          <ellipse cx="36" cy="62" rx="5" ry="3" fill="#3D8A78" opacity="0.3"/>
-          <ellipse cx="80" cy="62" rx="5" ry="3" fill="#3D8A78" opacity="0.3"/>
+          <ellipse cx="50" cy="66" rx="5" ry="4.5" fill="#0E2A30" opacity="0.5"/>
+          <!-- Cheek blush -->
+          <ellipse cx="28" cy="60" rx="5.5" ry="3" fill="#3D8A78" opacity="0.25"/>
+          <ellipse cx="72" cy="60" rx="5.5" ry="3" fill="#3D8A78" opacity="0.25"/>
           <defs>
-            <linearGradient id="ghostGrad" x1="40" y1="10" x2="80" y2="100" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#D8E8EB" stop-opacity="0.5"/>
+            <linearGradient id="ghostGrad" x1="30" y1="5" x2="70" y2="110" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#D8E8EB" stop-opacity="0.6"/>
               <stop offset="1" stop-color="#4A9EAF" stop-opacity="0"/>
             </linearGradient>
           </defs>
