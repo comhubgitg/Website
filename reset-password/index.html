@@ -48,7 +48,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
     }
 
     h1 {
@@ -70,7 +69,7 @@
       margin-bottom: 16px;
     }
 
-    input[type="password"] {
+    input {
       width: 100%;
       padding: 14px 48px 14px 16px;
       background: #121E22;
@@ -83,13 +82,8 @@
       transition: border-color 0.2s;
     }
 
-    input[type="password"]:focus {
-      border-color: #4A9EAF;
-    }
-
-    input[type="password"]::placeholder {
-      color: #5A7A82;
-    }
+    input:focus { border-color: #4A9EAF; }
+    input::placeholder { color: #5A7A82; }
 
     .toggle-pw {
       position: absolute;
@@ -100,15 +94,12 @@
       border: none;
       color: #5A7A82;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 14px;
       padding: 4px;
+      line-height: 1;
     }
 
-    .strength {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 6px;
-    }
+    .strength { display: flex; gap: 4px; margin-bottom: 6px; }
 
     .strength-bar {
       flex: 1;
@@ -141,11 +132,7 @@
     }
 
     .btn:hover { opacity: 0.9; }
-
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .error-msg {
       background: rgba(232, 99, 110, 0.1);
@@ -159,25 +146,13 @@
       display: none;
     }
 
-    .success-card {
+    .footer {
       text-align: center;
-    }
-
-    .success-card .icon {
-      background: rgba(76, 175, 80, 0.15);
-      border-color: rgba(76, 175, 80, 0.25);
-    }
-
-    .success-card p {
-      color: #8AABAD;
-      font-size: 15px;
-      margin-top: 12px;
-    }
-
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 40px 0;
+      color: #5A7A82;
+      font-size: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(90, 122, 130, 0.2);
     }
 
     .spinner {
@@ -190,35 +165,26 @@
       margin: 0 auto 16px;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .footer {
-      text-align: center;
-      color: #5A7A82;
-      font-size: 12px;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(90, 122, 130, 0.2);
-    }
-
-    #view-loading, #view-form, #view-success, #view-error { display: none; }
+    .view { display: none; }
   </style>
 </head>
 <body>
   <div class="card">
     <!-- Loading -->
-    <div id="view-loading">
-      <div class="loading" style="display:block;">
+    <div id="view-loading" class="view" style="display:block;">
+      <div style="text-align:center; padding:40px 0;">
         <div class="spinner"></div>
         <p style="color:#8AABAD; font-size:15px;">Проверяем ссылку...</p>
       </div>
     </div>
 
     <!-- Form -->
-    <div id="view-form">
-      <div class="icon">&#128274;</div>
+    <div id="view-form" class="view">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 256 256" fill="#4A9EAF"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-80-36a12,12,0,0,1-12-12v-20a12,12,0,0,1,24,0v20A12,12,0,0,1,128,172Z"/></svg>
+      </div>
       <h1>Новый пароль</h1>
       <p class="subtitle">Придумайте надёжный пароль для вашего аккаунта</p>
 
@@ -226,7 +192,7 @@
 
       <div class="field">
         <input type="password" id="password" placeholder="Новый пароль" autocomplete="new-password">
-        <button class="toggle-pw" onclick="togglePw('password')" type="button" aria-label="Показать пароль">&#128065;</button>
+        <button class="toggle-pw" onclick="togglePw('password')" type="button">&#9673;</button>
       </div>
 
       <div class="strength" id="strength-bars">
@@ -239,25 +205,28 @@
 
       <div class="field">
         <input type="password" id="confirm" placeholder="Подтвердите пароль" autocomplete="new-password">
-        <button class="toggle-pw" onclick="togglePw('confirm')" type="button" aria-label="Показать пароль">&#128065;</button>
+        <button class="toggle-pw" onclick="togglePw('confirm')" type="button">&#9673;</button>
       </div>
 
       <button class="btn" id="submit-btn" onclick="submitPassword()">Сохранить пароль</button>
-
       <div class="footer">Граунд — техники самопомощи при тревожности</div>
     </div>
 
     <!-- Success -->
-    <div id="view-success" class="success-card">
-      <div class="icon">&#9989;</div>
+    <div id="view-success" class="view" style="text-align:center;">
+      <div class="icon" style="background:rgba(76,175,80,0.15); border-color:rgba(76,175,80,0.25);">
+        <svg width="28" height="28" viewBox="0 0 256 256" fill="#4CAF50"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg>
+      </div>
       <h1>Пароль обновлён</h1>
-      <p>Теперь вы можете войти в приложение с новым паролем</p>
+      <p style="color:#8AABAD; font-size:15px; margin-top:12px;">Теперь вы можете войти в приложение с новым паролем</p>
       <div class="footer">Можете закрыть эту страницу</div>
     </div>
 
-    <!-- Error (invalid/expired link) -->
-    <div id="view-error">
-      <div class="icon" style="background:rgba(232,99,110,0.15); border-color:rgba(232,99,110,0.25);">&#9888;&#65039;</div>
+    <!-- Error -->
+    <div id="view-error" class="view">
+      <div class="icon" style="background:rgba(232,99,110,0.15); border-color:rgba(232,99,110,0.25);">
+        <svg width="28" height="28" viewBox="0 0 256 256" fill="#E8636E"><path d="M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM120,104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm8,88a12,12,0,1,1,12-12A12,12,0,0,1,128,192Z"/></svg>
+      </div>
       <h1>Ссылка недействительна</h1>
       <p class="subtitle">Ссылка для сброса пароля истекла или уже была использована. Запросите новую ссылку в приложении.</p>
       <div class="footer">Граунд — техники самопомощи при тревожности</div>
@@ -266,90 +235,59 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
-    const SUPABASE_URL = 'https://qzpywgxjheoqzdzgdqhw.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6cHl3Z3hqaGVvcXpkemdkcWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MDQyMzEsImV4cCI6MjA4ODA4MDIzMX0.NuLY38wUc5GecUHTbOPLIwWhuIChymtWQ-OZY8NQz1k';
+    var SUPABASE_URL = 'https://qzpywgxjheoqzdzgdqhw.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6cHl3Z3hqaGVvcXpkemdkcWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MDQyMzEsImV4cCI6MjA4ODA4MDIzMX0.NuLY38wUc5GecUHTbOPLIwWhuIChymtWQ-OZY8NQz1k';
 
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: {
-        detectSessionInUrl: true,
-        flowType: 'pkce',
-      }
-    });
-
-    let sessionReady = false;
+    var sb;
+    var ready = false;
 
     function showView(id) {
-      ['view-loading', 'view-form', 'view-success', 'view-error'].forEach(v => {
-        document.getElementById(v).style.display = v === id ? 'block' : 'none';
-      });
-    }
-
-    // Try opening in app on mobile
-    function tryOpenApp() {
-      const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-      if (isMobile) {
-        const deepLink = 'graund://reset-password' + window.location.search + window.location.hash;
-        window.location.href = deepLink;
+      var views = ['view-loading', 'view-form', 'view-success', 'view-error'];
+      for (var i = 0; i < views.length; i++) {
+        document.getElementById(views[i]).style.display = views[i] === id ? 'block' : 'none';
       }
     }
 
-    async function init() {
-      showView('view-loading');
-
-      // Try to open in app on mobile (non-blocking)
-      tryOpenApp();
-
-      // Listen for auth state changes
-      supabase.auth.onAuthStateChange((event, session) => {
-        if (event === 'PASSWORD_RECOVERY' || (event === 'SIGNED_IN' && session)) {
-          sessionReady = true;
-          showView('view-form');
-        }
-      });
-
-      // Also check URL for code parameter (PKCE flow)
-      const params = new URLSearchParams(window.location.search);
-      const code = params.get('code');
-
-      if (code) {
-        try {
-          const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-          if (error) throw error;
-          sessionReady = true;
-          showView('view-form');
-          return;
-        } catch (e) {
-          // Code exchange failed
-        }
-      }
-
-      // Check hash fragments (implicit flow)
-      const hash = window.location.hash;
-      if (hash && hash.includes('access_token')) {
-        // supabase-js detectSessionInUrl handles this automatically
-        // Wait a moment for the auth state change
-        setTimeout(() => {
-          if (!sessionReady) {
-            showView('view-error');
-          }
-        }, 3000);
+    function init() {
+      try {
+        sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+          auth: { detectSessionInUrl: true, flowType: 'implicit' }
+        });
+      } catch(e) {
+        showView('view-error');
         return;
       }
 
-      // No code and no hash — invalid link
-      if (!code && !hash) {
-        setTimeout(() => {
-          if (!sessionReady) {
-            showView('view-error');
-          }
-        }, 2000);
+      // Listen for PASSWORD_RECOVERY event from hash tokens
+      sb.auth.onAuthStateChange(function(event, session) {
+        if (ready) return;
+        if (event === 'PASSWORD_RECOVERY') {
+          ready = true;
+          showView('view-form');
+        } else if (event === 'SIGNED_IN' && session) {
+          ready = true;
+          showView('view-form');
+        }
+      });
+
+      // If no hash with tokens, show error after timeout
+      var hash = window.location.hash;
+      if (!hash || !hash.includes('access_token')) {
+        setTimeout(function() {
+          if (!ready) showView('view-error');
+        }, 1500);
+      } else {
+        // Hash has tokens, give supabase-js time to process
+        setTimeout(function() {
+          if (!ready) showView('view-error');
+        }, 5000);
       }
     }
 
     // Password strength
     function getStrength(pw) {
       if (!pw) return 0;
-      let s = 0;
+      var s = 0;
       if (pw.length >= 8) s++;
       if (pw.length >= 12) s++;
       if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) s++;
@@ -358,60 +296,63 @@
       return Math.min(s, 4);
     }
 
-    const strengthColors = ['', '#E8636E', '#F5A623', '#4A9EAF', '#4CAF50'];
-    const strengthLabels = ['', 'Слабый', 'Средний', 'Хороший', 'Надёжный'];
+    var strengthColors = ['', '#E8636E', '#F5A623', '#4A9EAF', '#4CAF50'];
+    var strengthLabels = ['', 'Слабый', 'Средний', 'Хороший', 'Надёжный'];
 
     document.getElementById('password').addEventListener('input', function() {
-      const s = getStrength(this.value);
-      const bars = document.querySelectorAll('.strength-bar');
-      bars.forEach((bar, i) => {
-        bar.style.background = i < s ? strengthColors[s] : 'rgba(90,122,130,0.25)';
-      });
+      var s = getStrength(this.value);
+      var bars = document.querySelectorAll('.strength-bar');
+      for (var i = 0; i < bars.length; i++) {
+        bars[i].style.background = i < s ? strengthColors[s] : 'rgba(90,122,130,0.25)';
+      }
       document.getElementById('strength-label').textContent = strengthLabels[s];
       document.getElementById('strength-label').style.color = strengthColors[s];
     });
 
     function togglePw(id) {
-      const input = document.getElementById(id);
+      var input = document.getElementById(id);
       input.type = input.type === 'password' ? 'text' : 'password';
     }
 
-    async function submitPassword() {
-      const pw = document.getElementById('password').value;
-      const confirm = document.getElementById('confirm').value;
-      const btn = document.getElementById('submit-btn');
-      const errorBanner = document.getElementById('error-banner');
+    function submitPassword() {
+      var pw = document.getElementById('password').value;
+      var conf = document.getElementById('confirm').value;
+      var btn = document.getElementById('submit-btn');
+      var err = document.getElementById('error-banner');
 
-      errorBanner.style.display = 'none';
+      err.style.display = 'none';
 
       if (!pw || pw.length < 8) {
-        errorBanner.textContent = 'Минимум 8 символов';
-        errorBanner.style.display = 'block';
+        err.textContent = 'Минимум 8 символов';
+        err.style.display = 'block';
         return;
       }
-
-      if (pw !== confirm) {
-        errorBanner.textContent = 'Пароли не совпадают';
-        errorBanner.style.display = 'block';
+      if (pw !== conf) {
+        err.textContent = 'Пароли не совпадают';
+        err.style.display = 'block';
         return;
       }
 
       btn.disabled = true;
       btn.textContent = 'Сохраняем...';
 
-      try {
-        const { error } = await supabase.auth.updateUser({ password: pw });
-        if (error) throw error;
-        showView('view-success');
-      } catch (e) {
-        errorBanner.textContent = e.message || 'Не удалось обновить пароль';
-        errorBanner.style.display = 'block';
+      sb.auth.updateUser({ password: pw }).then(function(res) {
+        if (res.error) {
+          err.textContent = res.error.message || 'Не удалось обновить пароль';
+          err.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Сохранить пароль';
+        } else {
+          showView('view-success');
+        }
+      }).catch(function(e) {
+        err.textContent = 'Не удалось обновить пароль';
+        err.style.display = 'block';
         btn.disabled = false;
         btn.textContent = 'Сохранить пароль';
-      }
+      });
     }
 
-    // Enter key support
     document.getElementById('confirm').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') submitPassword();
     });
