@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Страница не найдена | Граунд</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0E2A30;
+      font-family: 'Nunito', sans-serif;
+      color: #D8E8EB;
+      overflow: hidden;
+      padding: 1.5rem;
+    }
+
+    .container {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.7s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .digits {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+
+    .digit {
+      font-size: 120px;
+      font-weight: 800;
+      color: #D8E8EB;
+      opacity: 0;
+      line-height: 1;
+    }
+
+    .digit--left {
+      transform: translateX(-40px) rotate(-5deg);
+      animation: slideLeft 0.8s 0.2s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .digit--right {
+      transform: translateX(40px) rotate(5deg);
+      animation: slideRight 0.8s 0.2s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .ghost-wrap {
+      opacity: 0;
+      transform: scale(0.8) rotate(-5deg);
+      animation: ghostIn 0.6s 0.3s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .ghost-wrap svg {
+      width: 110px;
+      height: 110px;
+      animation: float 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 8px 24px rgba(74, 158, 175, 0.3));
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .ghost-wrap svg:hover {
+      transform: scale(1.15) translateY(-8px);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #D8E8EB;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s 0.4s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #8AABAD;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s 0.5s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #4A9EAF;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s 0.6s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .btn:hover {
+      background: #3B8A99;
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(74, 158, 175, 0.35);
+    }
+
+    .hint {
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.7s cubic-bezier(0.43, 0.13, 0.23, 0.96) forwards;
+    }
+
+    .hint a {
+      color: #5A7A82;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .hint a:hover {
+      color: #8AABAD;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideLeft {
+      to { opacity: 0.6; transform: translateX(0) rotate(0); }
+    }
+
+    @keyframes slideRight {
+      to { opacity: 0.6; transform: translateX(0) rotate(0); }
+    }
+
+    @keyframes ghostIn {
+      to { opacity: 1; transform: scale(1) rotate(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(-6px); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .digit { font-size: 72px; }
+      .ghost-wrap svg { width: 72px; height: 72px; }
+      h1 { font-size: 1.6rem; }
+      .subtitle { font-size: 1rem; }
+      .digits { gap: 0.5rem; margin-bottom: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="digits">
+      <span class="digit digit--left">4</span>
+      <div class="ghost-wrap">
+        <!-- Ghost SVG — teal-themed, matches graund palette -->
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body -->
+          <path d="M60 10C35 10 20 30 20 55v40c0 0 5-8 12-8s10 8 18 8 10-8 18-8 12 8 12 8V55c0-25-15-45-20-45z"
+                fill="#4A9EAF" opacity="0.9"/>
+          <!-- Lighter overlay -->
+          <path d="M60 10C35 10 20 30 20 55v40c0 0 5-8 12-8s10 8 18 8 10-8 18-8 12 8 12 8V55c0-25-15-45-20-45z"
+                fill="url(#ghostGrad)" opacity="0.4"/>
+          <!-- Eyes -->
+          <ellipse cx="45" cy="52" rx="7" ry="8" fill="#0E2A30"/>
+          <ellipse cx="72" cy="52" rx="7" ry="8" fill="#0E2A30"/>
+          <!-- Eye shine -->
+          <ellipse cx="43" cy="49" rx="2.5" ry="3" fill="#D8E8EB" opacity="0.7"/>
+          <ellipse cx="70" cy="49" rx="2.5" ry="3" fill="#D8E8EB" opacity="0.7"/>
+          <!-- Mouth -->
+          <ellipse cx="58" cy="68" rx="5" ry="4" fill="#0E2A30" opacity="0.6"/>
+          <!-- Blush -->
+          <ellipse cx="36" cy="62" rx="5" ry="3" fill="#3D8A78" opacity="0.3"/>
+          <ellipse cx="80" cy="62" rx="5" ry="3" fill="#3D8A78" opacity="0.3"/>
+          <defs>
+            <linearGradient id="ghostGrad" x1="40" y1="10" x2="80" y2="100" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#D8E8EB" stop-opacity="0.5"/>
+              <stop offset="1" stop-color="#4A9EAF" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="digit digit--right">4</span>
+    </div>
+
+    <h1>Бу! Страница исчезла!</h1>
+    <p class="subtitle">Кажется, эта страница решила стать призраком</p>
+
+    <a href="/" class="btn">На главную</a>
+
+    <div class="hint">
+      <a href="https://graund.space/#features">Узнать о приложении</a>
+    </div>
+  </div>
+</body>
+</html>
