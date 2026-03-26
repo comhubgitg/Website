@@ -36,6 +36,7 @@
   --feat-diary: #3D8A78;
   --feat-grounding: #5A8A6A;
   --feat-offline: #5A7A9A;
+  --feat-gamification: #B8860B;
 
   /* Typography */
   --font-family: 'Nunito', sans-serif;
@@ -636,6 +637,7 @@ button {
 .feature-card--diary { --card-accent: var(--feat-diary); }
 .feature-card--cbt { --card-accent: var(--feat-cbt); }
 .feature-card--offline { --card-accent: var(--feat-offline); }
+.feature-card--gamification { --card-accent: var(--feat-gamification); }
 
 .feature-card__icon {
   width: 52px;
@@ -860,6 +862,11 @@ button {
 
 .pricing-card--premium {
   border-color: var(--dark-accent);
+}
+
+.pricing-card--monthly {
+  border-color: var(--dark-accent);
+  opacity: 0.85;
 }
 
 .pricing-card--lifetime {
