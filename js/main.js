@@ -202,8 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
           premiumPrice.innerHTML = '399 \u20BD <span>/ \u043C\u0435\u0441</span>';
           premiumAlt.textContent = '';
         } else {
-          premiumPrice.innerHTML = '999 \u20BD <span>/ 4 \u043C\u0435\u0441</span>';
-          premiumAlt.textContent = '249,75 \u20BD/\u043C\u0435\u0441';
+          premiumPrice.innerHTML = '249,75 \u20BD <span>/ \u043C\u0435\u0441</span>';
+          premiumAlt.textContent = '999 \u20BD \u0437\u0430 4 \u043C\u0435\u0441\u044F\u0446\u0430';
         }
       });
     });
