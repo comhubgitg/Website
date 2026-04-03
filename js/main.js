@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!prefersReducedMotion) {
     const particlesContainer = document.querySelector('.particles');
     if (particlesContainer) {
-      const particleCount = 30;
+      const particleCount = 42;
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
