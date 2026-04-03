@@ -55,7 +55,7 @@
 }
 
 .particle {
-  animation: float-up var(--duration, 12s) linear var(--delay, 0s) infinite;
+  animation: float-up var(--duration, 12s) linear var(--delay, 0s) infinite backwards;
 }
 
 /* --- Stat count-up pulse --- */
