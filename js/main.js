@@ -103,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
-        const left = Math.random() * 100;
+        const slotWidth = 100 / particleCount;
+        const left = i * slotWidth + Math.random() * slotWidth;
         const duration = 8 + Math.random() * 16;
         const delay = Math.random() * 4;
         const size = 2 + Math.random() * 4;
