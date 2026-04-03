@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         particle.classList.add('particle');
         const left = Math.random() * 100;
         const duration = 8 + Math.random() * 16;
-        const delay = Math.random() * 12;
+        const delay = Math.random() * 4;
         const size = 2 + Math.random() * 4;
         const opacity = 0.15 + Math.random() * 0.35;
 
